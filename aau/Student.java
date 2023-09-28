@@ -10,10 +10,6 @@ public class Student {
         count++;
     }
 
-    public static void greet() {
-        System.out.println("I am a student");
-    }
-
     public static int getCount() {
         return count;
     }

@@ -1,42 +1,48 @@
 import aau.*;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // Grouproom room = new Grouproom("hello");
-        // System.out.println(room.getName());
 
-        Student thomas = new Student("thomas");
-        Student martin = new Student("martin");
-        Student jens = new Student("jens");
+        // Scanner scanner = new Scanner(System.in);
+        // String name = scanner.nextLine();
+        // System.out.println(name);
+        // scanner.close();
 
-        Group p3 = new Group("p3");
-        p3.addStudent(thomas);
-        p3.addStudent(martin);
-        p3.addStudent(jens);
+        List<Student> allStudents = new ArrayList<Student>();
+        List<Course> allCourses = new ArrayList<Course>();
+        List<Grouproom> allGrouprooms = new ArrayList<Grouproom>();
+        List<Group> allGroups = new ArrayList<Group>();
 
-        Group p4 = new Group("p4");
-        p4.addStudent(jens);
-
-        List<Student> members = p3.getStudents();
-
-        // for (Student student : members) {
-        //     System.out.println(student.name);
-        // }
-
-        for (Student student : p4.getStudents()) {
-            System.out.println(student.name);
+        String[] names = {"jens", "martin", "thomas", "mikkel", "max", "armin"};
+        for (String name : names) {
+            allStudents.add(new Student(name));
         }
 
-
-    }
-
-    public static void Slp(int ms) {
-        try {
-            Thread.sleep(ms);
+        String[] courses = {"OOP", "DEB", "SU", "DTG", "PBL", "SLIAL", "IMPR"};
+        for (String course : courses) {
+            allCourses.add(new Course(course));
         }
-        catch (Exception e) {
-            System.out.println(e);
+
+        String[] rooms = {"CAS", "FRB", "NOVI"};
+        for (String room : rooms) {
+            allGrouprooms.add(new Grouproom(room));
         }
+
+        String[] groups = {"P0", "P1", "P2", "P3"};
+        int count = 0;
+        for (String group : groups) {
+            Group grp = new Group(group);
+            for (Student student : allStudents.subList(count, count+3)) {
+                grp.addStudent(student);
+            }
+            allGroups.add(grp);
+            count++;
+        }
+
+        System.out.println(String.format("There are %d students", Student.getCount()));
     }
 }

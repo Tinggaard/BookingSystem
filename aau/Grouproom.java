@@ -18,6 +18,6 @@ public class Grouproom {
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 }
