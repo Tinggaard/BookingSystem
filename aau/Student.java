@@ -7,8 +7,13 @@ public class Student {
     static int count = 0;
     static Random generator = new Random(1337);
     static ArrayList<Student> allStudents = new ArrayList<Student>();
+
     String name;
+    int attendingCourseCount = 0;
     int studentId = generator.nextInt(1000);
+    ArrayList<Course> attendingCourses = new ArrayList<Course>();
+
+    // constructors
 
     public Student(String name) {
         this.name = name;
@@ -18,7 +23,6 @@ public class Student {
         allStudents.add(this);
         count++;
     }
-
 
     public Student(String name, int studentId) {
         this.name = name;
@@ -30,9 +34,17 @@ public class Student {
         count++;
     }
 
+    // static methods
+
     public static int getCount() {
         return count;
     }
+
+    public static ArrayList<Student> getAll() {
+        return allStudents;
+    }
+
+    // overrides
 
     public boolean equals(Object other) {
         if (other == null || !(other instanceof Student)) {
@@ -43,5 +55,19 @@ public class Student {
 
     public String toString() {
         return this.name;
+    }
+
+    // methods
+
+    public void addCourse(Course course) throws Error {
+        if (attendingCourseCount >= 5) {
+            throw new Error("Student cannot attend more than 5 courses");
+        }
+        if (attendingCourses.contains(course)) {
+            throw new Error("Student already takes this course");
+        }
+
+        attendingCourses.add(course);
+        attendingCourseCount++;
     }
 }

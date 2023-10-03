@@ -3,12 +3,15 @@ package aau;
 import java.util.ArrayList;
 
 public class Group {
-    ArrayList<Student> studentsInCourse = new ArrayList<Student>();
-    ArrayList<Group> allGroups = new ArrayList<Group>();
-    static int groupCount = 0;
+    static ArrayList<Group> allGroups = new ArrayList<Group>();
+    static int count = 0;
+
+    ArrayList<Student> students = new ArrayList<Student>();
     int groupSize = 0;
     String id;
     Course subject;
+
+    // constructors
 
     public Group(String id) {
         this.id = id;
@@ -16,12 +19,24 @@ public class Group {
             return;
         }
         allGroups.add(this);
-        groupCount++;
+        count++;
     }
 
     public Group(String id, Course course) {
-
+        // TODO: make this.
     }
+
+    // static methods
+
+    public static int getCount() {
+        return count;
+    }
+
+    public static ArrayList<Group> getAll() {
+        return allGroups;
+    }
+
+    // overrides
 
     public boolean equals(Object other) {
         if (other == null || !(other instanceof Group)) {
@@ -30,27 +45,27 @@ public class Group {
         return this.id.equals(((Group) other).id);
     }
 
-    public static int getGroupCount() {
-        return groupCount;
+    // getters
+
+    public ArrayList<Student> getStudentsInCourse() {
+        return students;
     }
 
+    public int getGroupSize() {
+        return groupSize;
+    }
+
+    // methods
+
     public void addStudent(Student student) throws Error {
-        if (studentsInCourse.contains(student)) {
+        if (students.contains(student)) {
             throw new Error("Student already in this group");
         }
 
         if (getGroupSize() >= 6) {
             throw new Error("Maximum group size reached");
         }
-        studentsInCourse.add(student);
+        students.add(student);
         groupSize++;
-    }
-
-    public ArrayList<Student> getStudentsInCourse() {
-        return studentsInCourse;
-    }
-
-    public int getGroupSize() {
-        return groupSize;
     }
 }

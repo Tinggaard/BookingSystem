@@ -3,9 +3,12 @@ package aau;
 import java.util.ArrayList;
 
 public class Course {
-    String subject;
-    ArrayList<Student> attendees = new ArrayList<Student>();
     static ArrayList<Course> allCourses = new ArrayList<Course>();
+    static int count = 0;
+
+    String subject;
+
+    // constructors
 
     public Course(String subject) {
         this.subject = subject;
@@ -14,13 +17,29 @@ public class Course {
             return;
         }
         allCourses.add(this);
+        count++;
     }
 
-    public static void addCourses(Iterable<String> subjects) {
-        for (String subject : subjects) {
-            new Course(subject);
+    // static methods
+
+    public static Course getCourse(String subject) {
+        int index = allCourses.indexOf(new Course(subject));
+        if (index == -1) {
+            return null;
         }
+        return allCourses.get(index);
     }
+
+    public static ArrayList<Course> getAll() {
+        return allCourses;
+    }
+
+    public static int getCount() {
+        return count;
+    }
+
+
+    // overrides
 
     // override equals to work on ArrayList.contains.
     public boolean equals(Object other) {
@@ -34,32 +53,10 @@ public class Course {
         return this.subject;
     }
 
-    public static Course getCourse(String subject) {
-        int index = allCourses.indexOf(new Course(subject));
-        if (index == -1) {
-            return null;
-        }
-        return allCourses.get(index);
-    }
 
-    public static ArrayList<Course> getAllCourses() {
-        return allCourses;
-    }
+    // getters
 
     public String getSubject() {
         return subject;
-    }
-
-    public ArrayList<Student> getAttendees() {
-        return this.attendees;
-    }
-
-
-    // add student to course, if they are not already in it.
-    public void addStudent(Student student) throws Error {
-        if (this.attendees.contains(student)) {
-            throw new Error("Student already attends course");
-        }
-        this.attendees.add(student);
     }
 }
