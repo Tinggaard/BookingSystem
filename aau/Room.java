@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Room {
     static ArrayList<Room> allRooms = new ArrayList<Room>();
-    // static ArrayList<Room> reservedRooms = new ArrayList<Room>();
+    private static int count = 0;
 
     String name; // name of grouproom
     private boolean reserved = false;
@@ -18,6 +18,7 @@ public class Room {
             return;
         }
         allRooms.add(this);
+        count++;
     }
 
     // static methods
@@ -37,6 +38,10 @@ public class Room {
         }
         // no available rooms were found
         return false;
+    }
+
+    public static int getCount() {
+        return count;
     }
 
     // overrides

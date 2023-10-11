@@ -4,12 +4,12 @@ import java.util.Random;
 import java.util.ArrayList;
 
 public class Student {
-    static int count = 0;
-    static Random generator = new Random(1337);
+    private static int count = 0;
+    private static Random generator = new Random(1337);
     static ArrayList<Student> allStudents = new ArrayList<Student>();
 
     String name;
-    int attendingCourseCount = 0;
+    private int attendingCourseCount = 0;
     int studentId = generator.nextInt(1000);
     ArrayList<Course> attendingCourses = new ArrayList<Course>();
 
@@ -60,14 +60,14 @@ public class Student {
     // methods
 
     public void addCourse(Course course) throws Error {
-        if (attendingCourseCount >= 5) {
+        if (this.attendingCourseCount >= 5) {
             throw new Error("Student cannot attend more than 5 courses");
         }
-        if (attendingCourses.contains(course)) {
+        if (this.attendingCourses.contains(course)) {
             throw new Error("Student already takes this course");
         }
 
-        attendingCourses.add(course);
-        attendingCourseCount++;
+        this.attendingCourses.add(course);
+        this.attendingCourseCount++;
     }
 }

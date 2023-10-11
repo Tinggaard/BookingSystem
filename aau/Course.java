@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Course {
     static ArrayList<Course> allCourses = new ArrayList<Course>();
-    static int count = 0;
+    private static int count = 0;
 
     String subject;
 
@@ -57,6 +57,6 @@ public class Course {
     // getters
 
     public String getSubject() {
-        return subject;
+        return this.subject;
     }
 }

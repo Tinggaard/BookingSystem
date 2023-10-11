@@ -51,10 +51,6 @@ public class BookingSystem {
                     printOptions();
                     break;
 
-                // case 4:
-                //     selectStudent(scanner);
-                //     break;
-
                 case 0:
                     scanner.close();
                     running = false;
