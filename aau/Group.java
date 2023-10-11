@@ -13,17 +13,15 @@ public class Group {
 
     // constructors
 
-    public Group(String id) {
+    public Group(String id, Course course) {
         this.id = id;
+        this.subject = course;
         if (allGroups.contains(this)) {
             return;
         }
+
         allGroups.add(this);
         count++;
-    }
-
-    public Group(String id, Course course) {
-        // TODO: make this.
     }
 
     // static methods
@@ -43,6 +41,10 @@ public class Group {
             return false;
         }
         return this.id.equals(((Group) other).id);
+    }
+
+    public String toString() {
+        return this.id;
     }
 
     // getters

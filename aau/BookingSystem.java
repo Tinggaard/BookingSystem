@@ -4,40 +4,6 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BookingSystem {
-    // static ArrayList<Student> allStudents = new ArrayList<Student>();
-    // static ArrayList<Course> allCourses = new ArrayList<Course>();
-    // static ArrayList<Room> allGrouprooms = new ArrayList<Room>();
-    // static ArrayList<Group> allGroups = new ArrayList<Group>();
-
-    // public static void init() {
-    //     String[] names = {"jens", "martin", "thomas", "mikkel", "max", "armin"};
-    //     for (String name : names) {
-    //         allStudents.add(new Student(name));
-    //     }
-
-    //     String[] courses = {"OOP", "DEB", "SU", "DTG", "PBL", "SLIAL", "IMPR"};
-    //     for (String course : courses) {
-    //         allCourses.add(new Course(course));
-    //     }
-
-    //     String[] rooms = {"CAS", "FRB", "NOVI"};
-    //     for (String room : rooms) {
-    //         allGrouprooms.add(new Room(room));
-    //     }
-
-    //     String[] groups = {"P0", "P1", "P2", "P3"};
-    //     int count = 0;
-    //     for (String group : groups) {
-    //         Group grp = new Group(group);
-    //         for (Student student : allStudents.subList(count, count+3)) {
-    //             grp.addStudent(student);
-    //         }
-    //         allGroups.add(grp);
-    //         count++;
-    //     }
-    // }
-
-
     // ------------------------
     // mainloop
     // ------------------------
@@ -61,16 +27,40 @@ public class BookingSystem {
                     break;
 
                 case 3:
+                    addGroup(scanner);
+                    printOptions();
+                    break;
+
+                case 4:
+                    addRoom(scanner);
+                    printOptions();
+                    break;
+
+                case 5:
+                    addStudentToCourse(scanner);
+                    printOptions();
+                    break;
+
+                case 6:
+                    addStudentToGroup(scanner);
+                    printOptions();
+                    break;
+
+                case 7:
+                    reserveRoomForGroup(scanner);
+                    printOptions();
+                    break;
+
+                // case 4:
+                //     selectStudent(scanner);
+                //     break;
+
+                case 0:
                     scanner.close();
                     running = false;
                     break;
 
-                case 4:
-                    selectStudent(scanner);
-                    break;
-
-
-                case 0:
+                case 8:
                 default:
                     printOptions();
                     break;
@@ -87,8 +77,13 @@ public class BookingSystem {
         System.out.println("Hello, please select something :)");
         System.out.println("1: add student");
         System.out.println("2: add course");
-        System.out.println("3: give up");
-        System.out.println("0: print this help message");
+        System.out.println("3: add group");
+        System.out.println("4: add room");
+        System.out.println("5: add student to course");
+        System.out.println("6: add student to group");
+        System.out.println("7: reserve room for group");
+        System.out.println("8: print this help message");
+        System.out.println("0: exit");
         System.out.println("------");
     }
 
@@ -113,7 +108,8 @@ public class BookingSystem {
     public static void addGroup(Scanner scanner) {
         System.out.println("What is the group name?");
         String name = scanner.nextLine().trim();
-        new Group(name);
+        Course course = selectCourse(scanner);
+        new Group(name, course);
         System.out.println("Successfully added the group!\n");
     }
 
@@ -189,17 +185,29 @@ public class BookingSystem {
     // link objects to one another
     // ------------------------
 
-    public void addStudentToCourse(Scanner scanner) {
+    public static void addStudentToCourse(Scanner scanner) {
         Student student = selectStudent(scanner);
         Course course = selectCourse(scanner);
         student.addCourse(course);
         System.out.println("successfully added student to course");
     }
 
-    public void addStudentToGroup(Scanner scanner) {
+    public static void addStudentToGroup(Scanner scanner) {
         Student student = selectStudent(scanner);
         Group group = selectGroup(scanner);
         group.addStudent(student);
         System.out.println("successfully added student to group");
+    }
+
+    // ------------------------
+    // interact with objects
+    // ------------------------
+
+    public static void reserveRoomForGroup(Scanner scanner) {
+        Group group = selectGroup(scanner);
+        boolean success = Room.reserveNextAvailable(group);
+        if (!success) {
+            System.out.print("Could not find available room, or group has already reserved a room\n");
+        }
     }
 }
