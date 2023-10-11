@@ -3,7 +3,7 @@ package aau;
 import java.util.ArrayList;
 
 public class Room {
-    static ArrayList<Room> allRooms = new ArrayList<Room>();
+    private static ArrayList<Room> allRooms = new ArrayList<Room>();
     private static int count = 0;
 
     String name; // name of grouproom

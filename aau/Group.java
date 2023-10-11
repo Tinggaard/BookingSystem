@@ -3,7 +3,7 @@ package aau;
 import java.util.ArrayList;
 
 public class Group {
-    static ArrayList<Group> allGroups = new ArrayList<Group>();
+    private static ArrayList<Group> allGroups = new ArrayList<Group>();
     private static int count = 0;
 
     ArrayList<Student> students = new ArrayList<Student>();

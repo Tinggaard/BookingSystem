@@ -3,7 +3,7 @@ package aau;
 import java.util.ArrayList;
 
 public class Course {
-    static ArrayList<Course> allCourses = new ArrayList<Course>();
+    private static ArrayList<Course> allCourses = new ArrayList<Course>();
     private static int count = 0;
 
     String subject;
@@ -50,13 +50,6 @@ public class Course {
     }
 
     public String toString() {
-        return this.subject;
-    }
-
-
-    // getters
-
-    public String getSubject() {
         return this.subject;
     }
 }

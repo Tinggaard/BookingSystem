@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Student {
     private static int count = 0;
     private static Random generator = new Random(1337);
-    static ArrayList<Student> allStudents = new ArrayList<Student>();
+    private static ArrayList<Student> allStudents = new ArrayList<Student>();
 
     String name;
     private int attendingCourseCount = 0;
