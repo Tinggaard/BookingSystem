@@ -1,0 +1,17 @@
+Description of the format used in the CSV files:
+
+* groups.csv
+For each group the file includes: 
+  * one line with the group's courseId, groupId, and number of members
+  * one line per member with the member's id and name
+The file includes information of zero, one, or more groups
+
+* rooms.csv
+For each room the file includes its identifier. Each identifier is included in a different line.
+The file includes information of zero, one, or more rooms
+
+* reservations.csv
+The file includes one line per reservation with its roomId, courseId, groupId, start date/time, and end date/time
+
+The file includes information of zero, one, or more reservations
+

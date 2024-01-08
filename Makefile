@@ -1,5 +1,5 @@
 run: build
-	java Main
+	java BookingSystem
 
 build:
 	javac *.java
