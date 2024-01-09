@@ -48,6 +48,7 @@ public class Room implements Identifiable<String> {
         return ret;
     }
 
+    @Override
     public String getIdentifier() {
         return id;
     }
