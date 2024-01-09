@@ -27,7 +27,11 @@ public class Room implements Identifiable<String> {
 
     @Override
     public String toString() {
-        return "Room " + id;
+        String ret = "";
+        for (LocalDate date : calendar.keySet()) {
+            ret += toString(date);
+        }
+        return ret;
     }
 
     public String toString(LocalDate date) {

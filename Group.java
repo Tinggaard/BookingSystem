@@ -16,12 +16,21 @@ public class Group implements Comparable<Group> {
         noMembers = studentIds.size();
     }
 
+    @Override
+    public String toString() {
+        return id + studentIds.toString();
+    }
+
     public void addTime(double d) {
         addTime((int) d*60);
     }
 
-    private void addTime(int minutes) {
+    public void addTime(int minutes) {
         minutesReserved += minutes;
+    }
+
+    public void addTime(long minutes) {
+        minutesReserved += (int) minutes;
     }
 
     public void clearTime() {

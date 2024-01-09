@@ -1,10 +1,12 @@
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
 public class Reservation implements TimeSlot, Comparable<Reservation> {
 
     public Group group;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
+    private boolean approved = false;
 
     Reservation(Group group, LocalDateTime start, LocalDateTime end) {
         this.group = group;
@@ -13,8 +15,8 @@ public class Reservation implements TimeSlot, Comparable<Reservation> {
     }
 
     public void approve() {
-        // TODO: update time used by group
-        System.out.println("somebody approved a reservation!");
+        approved = true;
+        group.addTime(ChronoUnit.MINUTES.between(startDate, endDate));
     }
 
     @Override
@@ -41,7 +43,7 @@ public class Reservation implements TimeSlot, Comparable<Reservation> {
     }
 
     public boolean isAvailable() {
-        return false;
+        return !approved;
     }
 
     @Override
