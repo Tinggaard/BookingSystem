@@ -25,7 +25,7 @@ public class BookingSystem {
         String groupId = scanner.nextLine().trim();
         System.out.println("Please provide the groups course");
         String courseId = scanner.nextLine().trim();
-        Group group = findGroup(groupId, courseId);
+        Group group = (Group) find(groups.get(courseId), groupId);
         if (group == null) {
             scanner.close();
             System.err.println("Group not found");
@@ -34,7 +34,7 @@ public class BookingSystem {
 
         System.out.println("Please provide a room ID");
         String roomId = scanner.nextLine().trim();
-        Room room = findRoom(roomId);
+        Room room = (Room) find(rooms, roomId);
         if (room == null) {
             scanner.close();
             System.err.println("Room does not exist");
@@ -85,7 +85,7 @@ public class BookingSystem {
                 int index = 1;
                 int candidateIndex = 0;
                 for (Reservation other : allReservations.subList(1, allReservations.size())) {
-                    if (candidate.overlaps(other) && candidate.compareTo(other) > 0) {
+                    if (candidate.overlaps(other) && candidate.compareTo(other) < 0) {
                         candidate = other;
                         candidateIndex = index;
                     }
@@ -164,13 +164,13 @@ public class BookingSystem {
             String startTime = st.nextToken();
             String endTime = st.nextToken();
 
-            Room r = findRoom(roomId);
+            Room r = (Room) find(rooms, roomId);
             if (r == null) {
                 s.close();
                 throw new Exception("Room not found" + roomId);
             }
 
-            Group g = findGroup(groupId, courseId);
+            Group g = (Group) find(groups.get(courseId), groupId);
             if (g == null) {
                 s.close();
                 throw new Exception("Group not found" + groupId);
@@ -221,19 +221,10 @@ public class BookingSystem {
         scanner.close();
     }
 
-    private Room findRoom(String roomId) {
-        for (Room room : rooms) {
-            if (room.getIdentifier().equals(roomId)) {
-                return room;
-            }
-        }
-        return null;
-    }
-
-    private Group findGroup(String groupId, String courseId) {
-        for (Group group : groups.get(courseId)) {
-            if (group.id.equals(groupId)) {
-                return group;
+    private static<T> Identifiable<T> find(List<? extends Identifiable<T>> list, T id) {
+        for (Identifiable<T> identifiable : list) {
+            if (identifiable.getIdentifier() == id) {
+                return identifiable;
             }
         }
         return null;

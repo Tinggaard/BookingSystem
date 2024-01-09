@@ -1,11 +1,11 @@
 import java.util.ArrayList;
 import java.util.List;
 
-public class Group implements Comparable<Group> {
+public class Group implements Comparable<Group>, Identifiable<String> {
 
     public String id;
     public String courseId;
-    public int minutesReserved;
+    public int minutesReserved = 0;
     public int noMembers;
     private List<Integer> studentIds = new ArrayList<>();
 
@@ -19,6 +19,11 @@ public class Group implements Comparable<Group> {
     @Override
     public String toString() {
         return id + studentIds.toString();
+    }
+
+    @Override
+    public String getIdentifier() {
+        return id;
     }
 
     public void addTime(double d) {

@@ -21,7 +21,7 @@ public class Reservation implements TimeSlot, Comparable<Reservation> {
 
     @Override
     public String toString() {
-        return "Reservation: {" + startDate.toString() + " to " + endDate.toString() + "}";
+        return "Reservation: {" + startDate.toString() + " to " + endDate.toString() + " by " + group.toString() + "}";
     }
 
     @Override
